@@ -48,16 +48,17 @@ export default function firebasePlugin({projectId, root, materializeConfig}: Fir
         only: 'hosting,functions',
         targets: ['hosting', 'functions']
       };
+      const config = Config.load(options);
       // @ts-ignore
-      options.config = Config.load(options);
+      options.config = config;
       setActiveAccount(options, account);
       if (materializeConfig) {
         await requireAuth(options);
         await ensureApi(options);
         const settings = await materializeAll(projectId);
-        // TODO get path from firebase config ?
+        const functionsDir = config.data.functions.source;
         await fs.promises.writeFile(
-          path.join(projectDir, 'functions/deploy/.runtimeconfig.json'),
+          path.join(functionsDir, '.runtimeconfig.json'),
           JSON.stringify(settings)
         );
       }
