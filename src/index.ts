@@ -26,9 +26,10 @@ export interface FirebasePluginOptions {
   projectId: string | ((server: ViteDevServer) => string)
   root?: string
   materializeConfig?: boolean
+  targets: string[]
 }
 
-export default function firebasePlugin({projectId, root, materializeConfig}: FirebasePluginOptions) {
+export default function firebasePlugin({projectId, root, materializeConfig, targets = ['hosting', 'functions']}: FirebasePluginOptions) {
   return {
     name: "vite:firebase",
     async configureServer(server: ViteDevServer) {
@@ -45,8 +46,8 @@ export default function firebasePlugin({projectId, root, materializeConfig}: Fir
         projectDir,
         nonInteractive: true,
         account,
-        only: 'hosting,functions',
-        targets: ['hosting', 'functions']
+        only: targets.join(','),
+        targets
       };
       const config = Config.load(options);
       // @ts-ignore
