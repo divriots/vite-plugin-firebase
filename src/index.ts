@@ -21,6 +21,8 @@ import {
   cleanShutdown,
 // @ts-ignore
 } from 'firebase-tools/lib/emulator/controller.js';
+// @ts-ignore
+import { shutdownWhenKilled } from 'firebase-tools/lib/emulator/commandUtils.js';
 
 export interface FirebasePluginOptions {
   projectId: string | ((server: ViteDevServer) => string)
@@ -38,6 +40,7 @@ export default function firebasePlugin({projectId, root, materializeConfig, targ
       if (!process.env.IS_FIREBASE_CLI) {
         process.env.IS_FIREBASE_CLI = 'true';
         setupLoggers();
+        shutdownWhenKilled({});
       }
       if (typeof projectId !== 'string') projectId = projectId(server);
       const account = getProjectDefaultAccount(projectDir);
