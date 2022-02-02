@@ -38,4 +38,4 @@ May break upon firebase-tools releases, have been tested with `9.22` & `9.23`
 
 [MIT](https://opensource.org/licenses/MIT)
 
-Copyright (c) 2021-present, <DIV>Riots
+Copyright (c) 2021-present, DIV Riots
