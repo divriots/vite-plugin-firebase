@@ -1,4 +1,6 @@
+
 # vite-plugin-firebase [![npm](https://img.shields.io/npm/v/vite-plugin-firebase.svg)](https://www.npmjs.com/package/vite-plugin-firebase)
+by [‹div›RIOTS](https://divRIOTS.com)
 
 This plugin will start firebase emulators (by default hosting & functions) in-process when running vite dev server (vite serve).
 
@@ -38,4 +40,5 @@ May break upon firebase-tools releases, have been tested with `9.22` & `9.23`
 
 [MIT](https://opensource.org/licenses/MIT)
 
-Copyright (c) 2021-present, DIV Riots
+Copyright (c) 2021-present, [‹div›RIOTS](https://divRIOTS.com)
+
