@@ -29,9 +29,10 @@ export interface FirebasePluginOptions {
   root?: string
   materializeConfig?: boolean
   targets: string[]
+  showUI: boolean
 }
 
-export default function firebasePlugin({projectId, root, materializeConfig, targets = ['hosting', 'functions']}: FirebasePluginOptions) {
+export default function firebasePlugin({projectId, root, materializeConfig, targets = ['hosting', 'functions'], showUI = false}: FirebasePluginOptions) {
   return {
     name: "vite:firebase",
     async configureServer(server: ViteDevServer) {
@@ -66,7 +67,7 @@ export default function firebasePlugin({projectId, root, materializeConfig, targ
           JSON.stringify(settings)
         );
       }
-      await startAll(options, false);
+      await startAll(options, showUI);
 
       // patch server.close to close emulators as well
       const { close } = server;
