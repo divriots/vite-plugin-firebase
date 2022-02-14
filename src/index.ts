@@ -26,13 +26,14 @@ import { shutdownWhenKilled } from 'firebase-tools/lib/emulator/commandUtils.js'
 
 export interface FirebasePluginOptions {
   projectId: string | ((server: ViteDevServer) => string)
+  projectName: string | ((server: ViteDevServer) => string)
   root?: string
   materializeConfig?: boolean
   targets: string[]
   showUI: boolean
 }
 
-export default function firebasePlugin({projectId, root, materializeConfig, targets = ['hosting', 'functions'], showUI = false}: FirebasePluginOptions) {
+export default function firebasePlugin({projectId, projectName = projectId, root, materializeConfig, targets = ['hosting', 'functions'], showUI = false}: FirebasePluginOptions) {
   return {
     name: "vite:firebase",
     async configureServer(server: ViteDevServer) {
@@ -44,9 +45,11 @@ export default function firebasePlugin({projectId, root, materializeConfig, targ
         shutdownWhenKilled({});
       }
       if (typeof projectId !== 'string') projectId = projectId(server);
+      if (typeof projectName !== 'string') projectName = projectName(server);
       const account = getProjectDefaultAccount(projectDir);
       const options = {
         projectId,
+        project: projectName,
         projectDir,
         nonInteractive: true,
         account,
