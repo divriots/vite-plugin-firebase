@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-firebase",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -18,7 +18,8 @@
     "vite-plugin"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts"
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "release": "npm install && npm run build && npm publish"
   },
   "engines": {
     "node": ">=12.0.0"
