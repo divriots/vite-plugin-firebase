@@ -59,7 +59,9 @@ export default function firebasePlugin({projectId, projectName = projectId, root
       const config = Config.load(options);
       // @ts-ignore
       options.config = config;
-      setActiveAccount(options, account);
+      if (account) {
+        setActiveAccount(options, account);
+      }
       if (materializeConfig) {
         await requireAuth(options);
         await ensureApi(options);
