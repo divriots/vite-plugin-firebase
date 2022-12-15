@@ -16,6 +16,8 @@ import {
 } from 'firebase-tools/lib/functionsConfig.js';
 // @ts-ignore
 import { requireAuth } from 'firebase-tools/lib/requireAuth.js';
+// @ts-ignore
+import { loadRC } from 'firebase-tools/lib/rc.js';
 import {
   startAll,
   cleanShutdown,
@@ -54,11 +56,13 @@ export default function firebasePlugin({projectId, projectName = projectId, root
         nonInteractive: true,
         account,
         only: targets.join(','),
-        targets
+        targets,
       };
       const config = Config.load(options);
       // @ts-ignore
       options.config = config;
+      // @ts-ignore
+      options.rc = loadRC(options);
       if (account) {
         setActiveAccount(options, account);
       }
