@@ -44,7 +44,7 @@ export default function firebasePlugin({projectId, projectName = projectId, root
       if (!process.env.IS_FIREBASE_CLI) {
         process.env.IS_FIREBASE_CLI = 'true';
         setupLoggers();
-        shutdownWhenKilled({});
+        shutdownWhenKilled({}).then(() => process.exit(0));
       }
       if (typeof projectId !== 'string') projectId = projectId(server);
       if (typeof projectName !== 'string') projectName = projectName(server);
