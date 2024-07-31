@@ -1,6 +1,9 @@
 import fs from "fs";
 import path from "path";
 import { ViteDevServer } from "vite";
+// needed because utils and logger have a cyclic dep. Fun.
+// @ts-ignore
+import 'firebase-tools/lib/logger.js';
 // @ts-ignore
 import { setupLoggers } from 'firebase-tools/lib/utils.js';
 // @ts-ignore
